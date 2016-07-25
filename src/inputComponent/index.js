@@ -13,8 +13,8 @@ export default class InputComponent extends Component {
 	}
 	onBlurHandler() {
 		if (this.props.matches.isShowed) {
-			if (this.props.matches.selectedLocation) {
-				ReactDOM.findDOMNode(this.refs.inputField).value = this.props.matches.selectedLocation;
+			if (this.props.matches.selectedItem) {
+				ReactDOM.findDOMNode(this.refs.inputField).value = this.props.matches.selectedItem;
 			}
 			
 			this.props.hideMatches();
@@ -26,29 +26,13 @@ export default class InputComponent extends Component {
 		e.preventDefault();
 
 		if (e.key === 'Enter') {
-			if (this.props.matches.selectedLocation) {
-				ReactDOM.findDOMNode(this.refs.inputField).value = this.props.matches.selectedLocation;
+			if (this.props.matches.selectedItem) {
+				ReactDOM.findDOMNode(this.refs.inputField).value = this.props.matches.selectedItem;
 				this.props.hideMatches();
 			}
 		}
 		else {
-			let matchesList = ReactDOM.findDOMNode(this.refs.matchesList);
-			let selectedItemName = this.props.matches.selectedLocation;
-			let newSelectedItemNode;
-			if (!selectedItemName) {
-				newSelectedItemNode = e.key === 'ArrowDown' ? matchesList.firstElementChild : matchesList.lastElementChild;
-			}
-			else {
-				let currentSelectedItemNode = ReactDOM.findDOMNode(this.refs[selectedItemName]);
-				if (e.key === 'ArrowDown') {
-					newSelectedItemNode = currentSelectedItemNode.nextElementSibling ? 
-											currentSelectedItemNode.nextElementSibling : matchesList.firstElementChild;
-				}
-				else {
-					newSelectedItemNode = currentSelectedItemNode.previousElementSibling ? 
-											currentSelectedItemNode.previousElementSibling : matchesList.lastElementChild;	
-				}
-			}
+			let newSelectedItemNode = this._getNextSelectedItem(e);
 
 			this.props.selectItem(newSelectedItemNode.textContent);
 		}
@@ -70,14 +54,36 @@ export default class InputComponent extends Component {
 				onFocus={::this.onInputFocusHandler} onInput={::this.onInputFocusHandler} 
 				onKeyDown={::this.onKeyHandler} onBlur={::this.onBlurHandler} />
 			<ul ref="matchesList" className={'ai-wrapper__list ' + (matches.isShowed ? '' : 'ai-wrapper__list-none')}>
-				{matches.locations.map((item, index) => {
+				{matches.items.map((item, index) => {
 					return <li ref={item} key={index} 
 							className={"ai-wrapper__list__item " + 
-										(item === matches.selectedLocation ? "ai-wrapper__list__item-hover" : "")}
+										(item === matches.selectedItem ? "ai-wrapper__list__item-hover" : "")}
 							onMouseEnter={::this.onMouseEnterHandler} onMouseLeave={::this.onMouseLeaveHandler} >{item}</li>
 				})}
 			</ul>
 		</div>
+	}
+
+	_getNextSelectedItem(e) {
+		let retVal;
+		let matchesList = ReactDOM.findDOMNode(this.refs.matchesList);
+		let selectedItemName = this.props.matches.selectedItem;			
+		if (!selectedItemName) {
+			retVal = e.key === 'ArrowDown' ? matchesList.firstElementChild : matchesList.lastElementChild;
+		}
+		else {
+			let currentSelectedItemNode = ReactDOM.findDOMNode(this.refs[selectedItemName]);
+			if (e.key === 'ArrowDown') {
+				retVal = currentSelectedItemNode.nextElementSibling ? 
+										currentSelectedItemNode.nextElementSibling : matchesList.firstElementChild;
+			}
+			else {
+				retVal = currentSelectedItemNode.previousElementSibling ? 
+										currentSelectedItemNode.previousElementSibling : matchesList.lastElementChild;	
+			}
+		}
+
+		return retVal;
 	}
 }
 

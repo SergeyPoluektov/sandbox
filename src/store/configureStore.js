@@ -1,14 +1,19 @@
 import {createStore, applyMiddleware} from 'redux'
 import rootReducer from '../reducers'
 import createLogger from 'redux-logger'
-import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
+import mainSaga from '../sagas'
+
 
 export default function configureStore(initialState) {
 	const logger = createLogger()
+	const sagaMiddleware = createSagaMiddleware()
 	const store = createStore(
 		rootReducer, 
 		initialState,
-		applyMiddleware(thunk, logger))
+		applyMiddleware(sagaMiddleware, logger))
+
+	sagaMiddleware.run(mainSaga);
 
 	if (module.hot) {
 		module.hot.accept('../reducers', () => {

@@ -2,8 +2,8 @@ import {FIND_MATCHES, SHOW_MATCHES, HIDE_MATCHES, SELECT_ITEM} from '../constant
 
 const initialState = {
 	matches: {
-		locations: [],
-		selectedLocation: '',
+		items: [],
+		selectedItem: '',
 		isShowed: false
 	}
 }
@@ -11,16 +11,16 @@ const initialState = {
 export default function inputComponent(state = initialState, action) {
 	switch (action.type) {
 		case FIND_MATCHES:
-			return {...state, matches: {...state.matches, locations: action.payload}}
+			return state;
 
 		case SHOW_MATCHES:
-			return {...state, matches: {...state.matches, isShowed: action.payload}};
+			return {...state, matches: {...state.matches, items: action.payload, isShowed: true}};
 
 		case HIDE_MATCHES:
-			return {...state, matches: {isShowed: action.payload, locations: [], selectedLocation: ''}}
+			return {...state, matches: {isShowed: action.payload, items: [], selectedItem: ''}}
 
 		case SELECT_ITEM:
-			return {...state, matches: {...state.matches, selectedLocation: action.payload}}
+			return {...state, matches: {...state.matches, selectedItem: action.payload}}
 
 		default:
 			return state;
