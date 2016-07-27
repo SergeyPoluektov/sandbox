@@ -1,4 +1,0 @@
-export const SHOW_MATCHES = 'SHOW_MATHES'
-export const HIDE_MATCHES = 'HIDE_MATCHES'
-export const CHANGE_INPUT = 'CHANGE_INPUT'
-export const SELECT_ITEM = 'SELECT_ITEM'

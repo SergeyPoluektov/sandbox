@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as actions from './actions'
+import * as actions from './ducks/departure'
 import Input from './components/Input'
 import Suggestion from './components/Suggestion'
-import './styles/index.css'
+import departureStyle from './styles/index.css'
 import getMatches from './matches'
 
 class Departure extends Component {
@@ -59,7 +59,7 @@ class Departure extends Component {
 		let PlaceForSuggestion = suggestionIsShown ? Suggestion : () => (<div></div>)
 
 		return (
-			<div className="ai-wrapper">
+			<div className={departureStyle.wrapper}>
 				<Input inputValue={inputValue} placeholder='Departure'
 						onInputFocusHandler={::this.onInputFocusHandler}
 						onBlurHandler={::this.onBlurHandler} onKeyHandler={::this.onKeyHandler} />

@@ -1,7 +1,7 @@
 import {takeLatest} from 'redux-saga'
 import {put} from 'redux-saga/effects'
-import {showMatches, hideMatches} from '../actions'
-import {CHANGE_INPUT} from '../constants'
+import {showMatches, hideMatches} from '../ducks/departure'
+import {CHANGE_INPUT} from '../ducks/departure'
 
 function* showSuggestion(action) {
 	if (action.payload.length > 0) {

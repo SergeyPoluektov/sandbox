@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
-// import '../styles/index.css'
+import inputStyles from '../styles/input.css'
 
 const Input = ({placeholder, inputValue, onInputFocusHandler, onKeyHandler, onBlurHandler}) => {
+	console.dir(inputStyles)
 	return (
-			<input className="ai-wrapper__input" type="text" placeholder={placeholder}
+			<input className={inputStyles.field} type="text" placeholder={placeholder}
 					value={inputValue}
 					onFocus={onInputFocusHandler} onInput={onInputFocusHandler} 
 					onKeyDown={onKeyHandler} onBlur={onBlurHandler} />

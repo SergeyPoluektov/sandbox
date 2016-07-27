@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react'
-// import '../styles/index.css'
+import suggestionStyle from '../styles/suggestion.css'
 
 const Suggestion = ({items, selectedItem, onMouseEnterHandler, onMouseLeaveHandler}) => {
 	return (
 		<div>
-			<ul className='ai-wrapper__list'>
+			<ul className={suggestionStyle['list']}>
 				{items.map((item, index) => {
 					return (
 						<li key={index} 
-							className={"ai-wrapper__list__item " + 
-										(item === selectedItem ? "ai-wrapper__list__item-hover" : "")}
+							className={suggestionStyle['list__item'] + 
+										(item === selectedItem ? ' ' + suggestionStyle['list__item-hover'] : "")}
 							onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler} >
 							{item}
 						</li>
