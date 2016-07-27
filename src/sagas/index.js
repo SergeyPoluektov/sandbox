@@ -1,6 +1,6 @@
 import {call} from 'redux-saga/effects'
-import inputSaga from '../inputComponent/sagas'
+import departureSage from '../Departure/sagas'
 
 export default function* mainSaga() {
-	yield [call(inputSaga)];
+	yield [call(departureSage)];
 }

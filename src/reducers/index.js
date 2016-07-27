@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import inputComponent from '../inputComponent/reducers'
+import departure from '../Departure/reducers'
 
 export default combineReducers({
-	inputComponent
+	departure
 })

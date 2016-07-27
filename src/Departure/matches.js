@@ -1,4 +1,17 @@
-export default function getMatches(template, items) {
+export default function getMatches(template) {
+	let items = [
+		"Moscow",
+		"Berlin",
+		"London",
+		"Paris",
+		"Madrid",
+		"Rome",
+		"Zurich",
+		"Vienna",
+		"Prague",
+		"Beijing"
+	]
+
 	template = template.toLowerCase();
 
 	let matches = [];
